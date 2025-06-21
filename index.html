@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Job ID Joiner</title>
+    <title>Job ID Joiner</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -12,12 +12,14 @@
             background-color: #1a202c;
             color: #e2e8f0;
             display: flex;
+            flex-direction: column; /* Allow vertical stacking of elements */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 1rem;
             margin: 0;
             box-sizing: border-box;
+            overflow: hidden; /* Prevent scrollbar from animation overflow */
         }
         .container {
             background-color: #2d3748;
@@ -27,6 +29,7 @@
             width: 100%;
             max-width: 500px;
             box-sizing: border-box;
+            z-index: 1; /* Ensure container is above background animations if any */
         }
         input[type="text"] {
             background-color: #4a5568;
@@ -69,6 +72,7 @@
         a:hover {
             color: #63b3ed;
         }
+        /* Tailwind-like spacing for consistency */
         .space-y-6 > :not([hidden]) ~ :not([hidden]) {
             --tw-space-y-reverse: 0;
             margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -93,11 +97,77 @@
         .text-center { text-align: center; }
         .block { display: block; }
         .hidden { display: none; }
+
+        /* Animation specific styles */
+        .animated-elements-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0; /* Adjust margin to bring closer to h1 */
+            margin-bottom: 2rem;
+        }
+
+        .spinning-neon-outline {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #ff0000, /* Red */
+                #ff7f00, /* Orange */
+                #ffff00, /* Yellow */
+                #00ff00, /* Green */
+                #0000ff, /* Blue */
+                #4b0082, /* Indigo */
+                #9400d3, /* Violet */
+                #ff0000 /* Red (to complete the loop) */
+            );
+            animation: spin 10s linear infinite, hue-shift 10s linear infinite;
+            filter: blur(2px) brightness(1.2);
+            -webkit-mask: radial-gradient(circle at center, transparent 70px, black 75px);
+            mask: radial-gradient(circle at center, transparent 70px, black 75px);
+            box-shadow: 0 0 15px rgba(0,255,255,0.7), 0 0 25px rgba(0,255,255,0.5), 0 0 40px rgba(0,255,255,0.3);
+        }
+
+        .phowg-text {
+            z-index: 10;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 8px #90cdf4, 0 0 15px #90cdf4, 0 0 25px #90cdf4;
+            animation: phowg-pulse 1.5s infinite alternate;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes hue-shift {
+            from { filter: blur(2px) brightness(1.2) hue-rotate(0deg); }
+            to { filter: blur(2px) brightness(1.2) hue-rotate(360deg); }
+        }
+
+        @keyframes phowg-pulse {
+            0% { transform: scale(1); opacity: 0.8; text-shadow: 0 0 8px #90cdf4; }
+            50% { transform: scale(1.05); opacity: 1; text-shadow: 0 0 15px #90cdf4, 0 0 25px #90cdf4; }
+            100% { transform: scale(1); opacity: 0.8; text-shadow: 0 0 8px #90cdf4; }
+        }
     </style>
 </head>
 <body>
+    <div class="animated-elements-wrapper">
+        <div class="spinning-neon-outline"></div>
+        <div class="phowg-text">phowg</div>
+    </div>
+
     <div class="container space-y-6">
-        <h1 class="text-3xl font-bold text-center mb-6">Roblox Job ID Joiner</h1>
+        <h1 class="text-3xl font-bold text-center mb-6">Job ID Joiner</h1>
 
         <div>
             <label for="jobIdInput" class="block text-sm font-medium mb-2">Enter Roblox Job ID:</label>
